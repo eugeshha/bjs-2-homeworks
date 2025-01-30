@@ -1,34 +1,84 @@
-﻿class Triangle {
-    constructor(a, b, c) {
-        if (a + b <= c || a + c <= b || b + c <= a) {
-            throw new Error("Треугольник с такими сторонами не существует");
-        }
-        this._a = a;
-        this._b = b;
-        this._c = c;
+﻿/**
+ * @param {string} value 
+ * @returns {number} 
+ * @throws {Error} .
+ */
+function parseCount(value) {
+    const result = Number.parseFloat(value);
+    if (Number.isNaN(result)) {
+      throw new Error("Невалидное значение");
     }
-
-    get perimeter() {
-        return this._a + this._b + this._c;
-    }
-
-    get area() {
-        const s = this.perimeter / 2;
-        return +(Math.sqrt(s * (s - this._a) * (s - this._b) * (s - this._c))).toFixed(3);
-    }
-}
-
-function getTriangle(a, b, c) {
+    return result;
+  }
+  
+  /**
+   * @param {string} value
+   * @returns {number|Error}
+   */
+  function validateCount(value) {
     try {
-        return new Triangle(a, b, c);
+      return parseCount(value);
     } catch (error) {
-        return Object.freeze({
-            get perimeter() { return "Ошибка! Треугольник не существует"; },
-            get area() { return "Ошибка! Треугольник не существует"; }
-        });
+      return error;
     }
-}
-
-console.log(getTriangle(3, 4, 5).perimeter);
-console.log(getTriangle(3, 4, 5).area);
-console.log(getTriangle(1, 1, 3).perimeter); 
+  }
+  
+  // ------------------- Задача №2 -------------------
+  
+  /**
+   */
+  class Triangle {
+    /**
+     * @param {number} a - сторона A.
+     * @param {number} b - сторона B.
+     * @param {number} c - сторона C.
+     * @throws {Error}
+     */
+    constructor(a, b, c) {
+      if ((a + b) <= c || (a + c) <= b || (b + c) <= a) {
+        throw new Error("Треугольник с такими сторонами не существует");
+      }
+      this.a = a;
+      this.b = b;
+      this.c = c;
+    }
+  
+    /**
+     * @returns {number}
+     */
+    get perimeter() {
+      return this.a + this.b + this.c;
+    }
+  
+    /**
+     * @returns {number} 
+     */
+    get area() {
+      const p = this.perimeter / 2;
+      const areaValue = Math.sqrt(
+        p * (p - this.a) * (p - this.b) * (p - this.c)
+      );
+      return +areaValue.toFixed(3);
+    }
+  }
+  
+  /**
+   * @param {number} a - сторона A.
+   * @param {number} b - сторона B.
+   * @param {number} c - сторона C.
+   * @returns {Triangle|object} 
+   */
+  function getTriangle(a, b, c) {
+    try {
+      return new Triangle(a, b, c);
+    } catch (e) {
+      return {
+        get perimeter() {
+          return "Ошибка! Треугольник не существует";
+        },
+        get area() {
+          return "Ошибка! Треугольник не существует";
+        },
+      };
+    }
+  }
