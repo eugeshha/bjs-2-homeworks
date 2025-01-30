@@ -24,8 +24,3 @@ function Student(name, gender, age) {
     this.marks = undefined;
     this.excluded = reason;
   };
-  
-  module.exports = {
-    Student
-  };
-  
