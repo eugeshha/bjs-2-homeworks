@@ -41,13 +41,12 @@ class Student {
     }
 }
 
-// Пример использования
 const student = new Student("Олег Никифоров");
 student.addMark(5, "химия");
 student.addMark(5, "химия");
 student.addMark(5, "физика");
 student.addMark(4, "физика");
-student.addMark(6, "физика");  // Оценка не добавится
+student.addMark(6, "физика"); 
 
 console.log(`Средний балл по физике: ${student.getAverageBySubject("физика")}`);
 console.log(`Средний балл по биологии: ${student.getAverageBySubject("биология")}`);
