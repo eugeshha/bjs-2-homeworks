@@ -3,13 +3,12 @@ class PrintEditionItem {
       this.name = name;
       this.releaseDate = releaseDate;
       this.pagesCount = pagesCount;
-      this.state = 100;
+      this._state = 100;
       this.type = null;
     }
   
     fix() {
       this.state *= 1.5;
-      if (this.state > 100) this.state = 100;
     }
   
     set state(value) {
@@ -87,7 +86,7 @@ class PrintEditionItem {
       return null;
     }
   }
-
+  
   const library = new Library("Библиотека имени Ленина");
   
   library.addBook(
@@ -112,13 +111,13 @@ class PrintEditionItem {
   console.log(library.findBookBy("name", "Властелин колец")); 
   console.log(library.findBookBy("releaseDate", 1924).name); 
   
-  console.log("Количество книг до выдачи: " + library.books.length);
+  console.log("Количество книг до выдачи: " + library.books.length); 
   const borrowedBook = library.giveBookByName("Машина времени");
-  console.log("Количество книг после выдачи: " + library.books.length);
+  console.log("Количество книг после выдачи: " + library.books.length); 
   
   if (borrowedBook) {
     borrowedBook.state = 10;
-    console.log(borrowedBook.state); 
+    console.log(borrowedBook.state);
     borrowedBook.fix();
     console.log(borrowedBook.state); 
     library.addBook(borrowedBook);
